@@ -70,6 +70,21 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Animación premium para el logo de CeroTraba */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                filter: drop-shadow(0 0 2px rgba(255, 242, 0, 0.2));
+            }
+            50% {
+                transform: translateY(-4px) scale(1.05);
+                filter: drop-shadow(0 0 8px rgba(0, 174, 239, 0.6));
+            }
+        }
+        .cerotraba-logo-anim {
+            animation: float-logo 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-darkBg text-white antialiased">
@@ -619,9 +634,18 @@
             </div>
 
             <!-- Disclaimer and Rights -->
-            <div class="pt-8 border-t border-white/5 text-center text-xs text-gray-500 space-y-2">
+            <div class="pt-8 border-t border-white/5 text-center text-xs text-gray-500 space-y-4">
                 <p>&copy; 2026 Copacabana en la Noche Pool & Bar. Todos los derechos reservados.</p>
                 <p>Disfruta con responsabilidad. Venta exclusiva a mayores de 18 años.</p>
+                
+                <!-- CeroTraba Developer Badge -->
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2 pt-2 text-gray-400 font-medium">
+                    <span>Desarrollado por</span>
+                    <a href="https://github.com/sqsebastianquintana77-tech" target="_blank" class="flex items-center space-x-2 group">
+                        <img src="logo_CeroTraba.png" alt="CeroTraba Logo" class="h-6 w-auto object-contain transition-transform duration-300 group-hover:scale-110 cerotraba-logo-anim" onerror="this.style.display='none';">
+                        <span class="font-montserrat font-bold text-sm tracking-wide text-white group-hover:text-neonYellow transition-colors">CeroTraba</span>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
