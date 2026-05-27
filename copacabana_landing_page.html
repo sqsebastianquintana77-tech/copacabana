@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copacabana en la Noche | Pool & Bar Premium</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Montserrat (para títulos) e Inter (para cuerpo de texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0B0B0C',
+                        darkCard: '#161618',
+                        neonYellow: '#FFF200',
+                        neonBlue: '#00AEEF',
+                        neonRed: '#FF3366',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-yellow': '0 0 15px rgba(255, 242, 0, 0.4)',
+                        'neon-blue': '0 0 15px rgba(0, 174, 239, 0.4)',
+                        'neon-red': '0 0 15px rgba(255, 51, 102, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados adicionales para atmósfera nocturna */
+        body {
+            background-color: #0B0B0C;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .neon-text-yellow {
+            text-shadow: 0 0 8px rgba(255, 242, 0, 0.6);
+        }
+        
+        .neon-text-blue {
+            text-shadow: 0 0 8px rgba(0, 174, 239, 0.6);
+        }
+
+        .neon-border-blue {
+            box-shadow: 0 0 10px rgba(0, 174, 239, 0.3), inset 0 0 10px rgba(0, 174, 239, 0.2);
+        }
+
+        .neon-border-yellow {
+            box-shadow: 0 0 10px rgba(255, 242, 0, 0.3), inset 0 0 10px rgba(255, 242, 0, 0.2);
+        }
+        
+        /* Ocultar scrollbar en navegadores */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-white antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-darkBg/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo (Integración de Mini-Logo en Navbar) -->
+                <a href="#inicio" class="flex items-center space-x-3 group">
+                    <!-- Miniatura del logotipo original al lado del texto de marca -->
+                    <div class="w-10 h-10 rounded-full overflow-hidden border border-neonYellow/50 bg-darkCard flex-shrink-0">
+                        <img src="logo_.jpg" alt="Logo Copacabana" class="w-full h-full object-cover" onerror="this.style.display='none';">
+                    </div>
+                    <span class="font-montserrat font-black italic text-lg sm:text-xl tracking-wider text-white group-hover:text-neonYellow transition-colors">
+                        COPACABANA <span class="text-neonYellow group-hover:text-white transition-colors">POOL BAR</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-sm font-medium hover:text-neonYellow transition-colors">Inicio</a>
+                    <a href="#menu" class="text-sm font-medium hover:text-neonYellow transition-colors">Carta de Licores</a>
+                    <a href="#eventos" class="text-sm font-medium hover:text-neonYellow transition-colors">Eventos</a>
+                    <a href="#rumberos" class="text-sm font-medium hover:text-neonYellow transition-colors">Rumberos</a>
+                    <a href="#galeria" class="text-sm font-medium hover:text-neonYellow transition-colors">Galería</a>
+                    <a href="#ubicacion" class="text-sm font-medium hover:text-neonYellow transition-colors">Ubicación</a>
+                </div>
+
+                <!-- Reservation Button -->
+                <div class="hidden md:block">
+                    <button onclick="openReservationModal()" class="px-6 py-2.5 rounded-full bg-neonYellow text-black font-montserrat font-bold hover:bg-white hover:shadow-neon-yellow transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i class="fa-regular fa-calendar-days mr-2"></i>RESERVA YA
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-neonYellow focus:outline-none text-2xl">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-darkCard border-b border-white/10 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="block text-lg font-medium py-2 border-b border-white/5" onclick="toggleMobileMenu()">Inicio</a>
+            <a href="#menu" class="block text-lg font-medium py-2 border-b border-white/5" onclick="toggleMobileMenu()">Carta de Licores</a>
+            <a href="#eventos" class="block text-lg font-medium py-2 border-b border-white/5" onclick="toggleMobileMenu()">Eventos</a>
+            <a href="#rumberos" class="block text-lg font-medium py-2 border-b border-white/5" onclick="toggleMobileMenu()">Rumberos</a>
+            <a href="#galeria" class="block text-lg font-medium py-2 border-b border-white/5" onclick="toggleMobileMenu()">Galería</a>
+            <a href="#ubicacion" class="block text-lg font-medium py-2 border-b border-white/5" onclick="toggleMobileMenu()">Ubicación</a>
+            <button onclick="openReservationModal(); toggleMobileMenu();" class="w-full mt-4 py-3 rounded-full bg-neonYellow text-black font-montserrat font-bold hover:bg-white text-center">
+                <i class="fa-regular fa-calendar-days mr-2"></i>RESERVA YA
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <!-- Background Neon Lasers (Inspired by the logo's red neon lines) -->
+        <div class="absolute top-1/4 left-0 w-96 h-1 bg-gradient-to-r from-neonRed to-transparent opacity-60 rotate-12 blur-sm transform -translate-x-12"></div>
+        <div class="absolute bottom-1/3 right-0 w-96 h-1 bg-gradient-to-l from-neonRed to-transparent opacity-60 -rotate-12 blur-sm transform translate-x-12"></div>
+        
+        <!-- Ambient radial glow behind the main logo container -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,174,239,0.15)_0%,transparent_60%)] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12">
+            <!-- Text Content -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-neonYellow text-sm font-semibold tracking-wider uppercase">
+                    <i class="fa-solid fa-beer-mug-empty"></i>
+                    <span>El mejor Pool Bar de la ciudad</span>
+                </div>
+                
+                <h1 class="font-montserrat font-black italic text-4xl sm:text-6xl lg:text-7xl leading-none uppercase">
+                    COPACABANA <br>
+                    <span class="text-neonYellow neon-text-yellow">EN LA NOCHE</span> <br>
+                    <span class="text-neonBlue neon-text-blue text-3xl sm:text-5xl font-bold not-italic">POOL & BAR</span>
+                </h1>
+                
+                <p class="text-gray-300 text-lg sm:text-xl max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Siente la verdadera energía tropical unida a la pasión del billar. Coctelería de autor, mesas profesionales de pool, noches inolvidables y el ambiente nocturno más exclusivo.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
+                    <button onclick="openReservationModal()" class="px-8 py-4 rounded-full bg-neonYellow text-black font-montserrat font-extrabold tracking-wider hover:bg-white hover:shadow-neon-yellow transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fa-solid fa-calendar-check mr-2"></i>RESERVAR MESA
+                    </button>
+                    <a href="#menu" class="px-8 py-4 rounded-full border-2 border-neonBlue text-neonBlue font-montserrat font-extrabold tracking-wider hover:bg-neonBlue hover:text-white hover:shadow-neon-blue transition-all duration-300 transform hover:-translate-y-1 text-center">
+                        <i class="fa-solid fa-wine-glass mr-2"></i>VER CARTA
+                    </a>
+                </div>
+
+                <!-- Fast Info Badges -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 max-w-md mx-auto lg:mx-0">
+                    <div class="text-center lg:text-left">
+                        <p class="text-neonYellow font-bold text-xl sm:text-2xl">6+</p>
+                        <p class="text-gray-400 text-xs uppercase tracking-wider">Mesas de Pool</p>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <p class="text-neonBlue font-bold text-xl sm:text-2xl">30+</p>
+                        <p class="text-gray-400 text-xs uppercase tracking-wider">Cócteles & Tragos</p>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <p class="text-neonRed font-bold text-xl sm:text-2xl">100%</p>
+                        <p class="text-gray-400 text-xs uppercase tracking-wider">Actitud Rumbera</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Asset - Referencing the Logo "imagen_copacabana.jpg" -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative group">
+                    <!-- Beautiful neon rotating glow effect back of the logo -->
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-neonYellow via-neonBlue to-neonRed rounded-full opacity-70 blur-md group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                    
+                    <!-- Main Logo Container Frame -->
+                    <div class="relative w-80 h-80 sm:w-96 sm:h-96 rounded-full overflow-hidden bg-darkCard border-4 border-black shadow-2xl flex items-center justify-center">
+                        <!-- El atributo "src" apunta directamente al archivo local -->
+                        <img src="logo_.jpg" alt="Copacabana en la noche logo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0b0b0c/fff200?text=COPACABANA+POOL+BAR';">
+                    </div>
+                    
+                    <!-- Small interactive accent badge floating -->
+                    <div class="absolute -bottom-4 -right-4 bg-darkCard border border-white/20 px-4 py-2 rounded-xl flex items-center space-x-2 shadow-lg animate-bounce">
+                        <span class="flex h-3.5 w-3.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-xs font-bold font-montserrat uppercase tracking-wider text-gray-200">Abierto Hoy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Liquor Menu Section -->
+    <section id="menu" class="py-24 bg-darkCard relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="font-montserrat font-black italic text-3xl sm:text-5xl uppercase">
+                    CARTA DE <span class="text-neonYellow neon-text-yellow">LICORES & SNACKS</span>
+                </h2>
+                <div class="h-1 w-24 bg-neonBlue mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    Explora nuestra selección exclusiva de tragos imperiales, coctelería exótica y los mejores acompañantes para tu partida de pool.
+                </p>
+            </div>
+
+            <!-- Menu Navigation Tabs -->
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex bg-darkBg border border-white/10 p-1.5 rounded-full overflow-x-auto no-scrollbar max-w-full">
+                    <button onclick="filterMenu('cocteles')" id="tab-cocteles" class="tab-btn px-6 py-2.5 rounded-full text-sm font-montserrat font-bold transition-all duration-300 bg-neonYellow text-black hover:shadow-neon-yellow">
+                        <i class="fa-solid fa-martini-glass-citrus mr-2"></i>Cócteles
+                    </button>
+                    <button onclick="filterMenu('premium')" id="tab-premium" class="tab-btn px-6 py-2.5 rounded-full text-sm font-montserrat font-bold transition-all duration-300 text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-whiskey-glass mr-2"></i>Licores Premium
+                    </button>
+                    <button onclick="filterMenu('cervezas')" id="tab-cervezas" class="tab-btn px-6 py-2.5 rounded-full text-sm font-montserrat font-bold transition-all duration-300 text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-beer-mug-empty mr-2"></i>Cervezas
+                    </button>
+                    <button onclick="filterMenu('snacks')" id="tab-snacks" class="tab-btn px-6 py-2.5 rounded-full text-sm font-montserrat font-bold transition-all duration-300 text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-bowl-food mr-2"></i>Snacks
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Grid -->
+            <div id="menu-items-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Loaded dynamically by JS to handle responsiveness and interaction -->
+            </div>
+
+            <!-- Call to action below menu -->
+            <div class="mt-16 text-center">
+                <p class="text-gray-400 mb-4 font-light">¿Quieres ver la carta completa con precios actualizados y promociones especiales del día?</p>
+                <a href="https://wa.me/584120000000?text=Hola!%20Me%20gustar%C3%ADa%20ver%20la%20carta%20completa%20de%20Copacabana%20Pool%20Bar" target="_blank" class="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold font-montserrat shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>SOLICITAR CARTA COMPLETA POR WHATSAPP</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section id="eventos" class="py-24 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neonYellow/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="font-montserrat font-black italic text-3xl sm:text-5xl uppercase">
+                    PRÓXIMOS <span class="text-neonBlue neon-text-blue">EVENTOS</span>
+                </h2>
+                <div class="h-1 w-24 bg-neonYellow mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    En Copacabana en la noche el fin de semana nunca termina. Prepárate para vivir los eventos temáticos más prendidos.
+                </p>
+            </div>
+
+            <!-- Events Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Event 1 -->
+                <div class="bg-darkCard rounded-3xl overflow-hidden border border-white/10 group hover:border-neonYellow/40 transition-all duration-500 flex flex-col justify-between">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800" alt="Ladies Night" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkCard to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-neonYellow text-black font-montserrat font-extrabold text-xs px-3 py-1.5 rounded-full shadow-lg">ESTE JUEVES</span>
+                    </div>
+                    <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-montserrat font-bold text-xl text-white group-hover:text-neonYellow transition-colors">Ladies Night & Chill</h3>
+                            <p class="text-gray-400 text-sm mt-2 line-clamp-3">
+                                Ellas mandan en Copacabana. Disfruta de un cóctel de bienvenida de cortesía para todas las rumberas y promociones exclusivas en Margaritas y Gin Tonics toda la noche.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1 text-neonYellow"></i> 8:00 PM en adelante</span>
+                            <button onclick="openReservationModal('Ladies Night')" class="text-sm font-bold text-neonYellow hover:underline">Reservar <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 (Featured - Neon Blue border) -->
+                <div class="bg-darkCard rounded-3xl overflow-hidden border-2 border-neonBlue group shadow-neon-blue transition-all duration-500 flex flex-col justify-between relative transform lg:-translate-y-4">
+                    <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-neonBlue text-black font-montserrat font-black text-xs px-4 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                        SÚPER DESTACADO
+                    </div>
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=800" alt="Neon Neon Pool Night" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkCard to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-neonBlue text-white font-montserrat font-extrabold text-xs px-3 py-1.5 rounded-full shadow-lg">ESTE VIERNES</span>
+                    </div>
+                    <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-montserrat font-bold text-2xl text-white group-hover:text-neonBlue transition-colors">Noche de Neon Pool & Salsa</h3>
+                            <p class="text-gray-400 text-sm mt-2 line-clamp-3">
+                                Luces ultravioleta, pintura neón gratis, música en vivo y el mejor repertorio de salsa bailable para gozar mientras juegas en nuestras mesas profesionales. ¡Vístete para brillar!
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1 text-neonBlue"></i> 9:00 PM en adelante</span>
+                            <button onclick="openReservationModal('Neon Pool & Salsa')" class="text-sm font-bold text-neonBlue hover:underline">Reservar <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="bg-darkCard rounded-3xl overflow-hidden border border-white/10 group hover:border-neonYellow/40 transition-all duration-500 flex flex-col justify-between">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800" alt="Sábado de Dj Set" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkCard to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-neonYellow text-black font-montserrat font-extrabold text-xs px-3 py-1.5 rounded-full shadow-lg">ESTE SÁBADO</span>
+                    </div>
+                    <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-montserrat font-bold text-xl text-white group-hover:text-neonYellow transition-colors">Saturday Beats & Premium Drinks</h3>
+                            <p class="text-gray-400 text-sm mt-2 line-clamp-3">
+                                Los mejores DJs locales mezclando en vivo el mejor house, reggaetón y ritmos tropicales. Combos especiales en botellas importadas y ambiente insuperable.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-clock mr-1 text-neonYellow"></i> 8:00 PM en adelante</span>
+                            <button onclick="openReservationModal('Saturday Beats')" class="text-sm font-bold text-neonYellow hover:underline">Reservar <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rumberos de la Semana Section -->
+    <section id="rumberos" class="py-24 bg-darkCard relative overflow-hidden">
+        <div class="absolute top-1/2 left-0 w-80 h-80 bg-neonRed/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-bold text-neonYellow uppercase tracking-widest bg-neonYellow/10 px-3 py-1 rounded-full"><i class="fa-solid fa-fire mr-1"></i> Comunidad Copacabana</span>
+                <h2 class="font-montserrat font-black italic text-3xl sm:text-5xl uppercase">
+                    RUMBEROS <span class="text-neonYellow neon-text-yellow">DE LA SEMANA</span>
+                </h2>
+                <div class="h-1 w-24 bg-neonBlue mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    La noche pertenece a quienes la disfrutan al máximo. Aquí destacamos las mejores sonrisas y jugadas de nuestro último fin de semana.
+                </p>
+            </div>
+
+            <!-- Spotlight Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Rumbero 1 -->
+                <div class="relative rounded-3xl overflow-hidden group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" alt="Rumbero 1" class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-xs text-neonYellow font-semibold uppercase tracking-widest"><i class="fa-brands fa-instagram mr-1"></i> @sofia_rumbera</span>
+                        <h4 class="font-montserrat font-bold text-lg mt-1">Sofía & Amigas</h4>
+                        <p class="text-xs text-gray-300 mt-1 italic">"La mejor combinación de Pool y Margaritas!"</p>
+                        <button onclick="likeRumbero(this)" class="mt-4 flex items-center space-x-1.5 self-start text-xs bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-neonRed hover:text-white transition-all">
+                            <i class="fa-solid fa-heart text-neonRed group-hover:animate-ping"></i>
+                            <span class="like-count">124</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rumbero 2 -->
+                <div class="relative rounded-3xl overflow-hidden group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600" alt="Rumbero 2" class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-xs text-neonBlue font-semibold uppercase tracking-widest"><i class="fa-brands fa-instagram mr-1"></i> @carlos_play_hard</span>
+                        <h4 class="font-montserrat font-bold text-lg mt-1">El Team de Billar</h4>
+                        <p class="text-xs text-gray-300 mt-1 italic">"Ganadores del torneo express de los viernes"</p>
+                        <button onclick="likeRumbero(this)" class="mt-4 flex items-center space-x-1.5 self-start text-xs bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-neonRed hover:text-white transition-all">
+                            <i class="fa-solid fa-heart text-neonRed"></i>
+                            <span class="like-count">98</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rumbero 3 -->
+                <div class="relative rounded-3xl overflow-hidden group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600" alt="Rumbero 3" class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-xs text-neonYellow font-semibold uppercase tracking-widest"><i class="fa-brands fa-instagram mr-1"></i> @mari_caribean</span>
+                        <h4 class="font-montserrat font-bold text-lg mt-1">Cumple de Mariana</h4>
+                        <p class="text-xs text-gray-300 mt-1 italic">"Celebrando con los cócteles más exóticos"</p>
+                        <button onclick="likeRumbero(this)" class="mt-4 flex items-center space-x-1.5 self-start text-xs bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-neonRed hover:text-white transition-all">
+                            <i class="fa-solid fa-heart text-neonRed"></i>
+                            <span class="like-count">245</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rumbero 4 -->
+                <div class="relative rounded-3xl overflow-hidden group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600" alt="Rumbero 4" class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-xs text-neonBlue font-semibold uppercase tracking-widest"><i class="fa-brands fa-instagram mr-1"></i> @jorge_beats</span>
+                        <h4 class="font-montserrat font-bold text-lg mt-1">Noches de Sabor</h4>
+                        <p class="text-xs text-gray-300 mt-1 italic">"La mejor rumba con los panas de la oficina"</p>
+                        <button onclick="likeRumbero(this)" class="mt-4 flex items-center space-x-1.5 self-start text-xs bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-neonRed hover:text-white transition-all">
+                            <i class="fa-solid fa-heart text-neonRed"></i>
+                            <span class="like-count">187</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social CTA Banner -->
+            <div class="mt-16 bg-gradient-to-r from-neonYellow/10 via-darkBg to-neonBlue/10 border border-white/10 rounded-3xl p-8 sm:p-12 text-center space-y-6">
+                <h3 class="font-montserrat font-black text-2xl sm:text-3xl uppercase">¿Quieres aparecer aquí el próximo fin de semana?</h3>
+                <p class="text-gray-300 max-w-2xl mx-auto font-light">
+                    Sube tu historia o publicación disfrutando en **Copacabana**, menciónanos en Instagram con nuestro tag oficial y podrás ser el rumbero estrella de la semana, ¡además de ganar un cóctel de cortesía!
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.instagram.com/newcopacabana/" target="_blank" class="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold font-montserrat flex items-center space-x-2 transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span>ETIQUÉTANOS EN INSTAGRAM</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="galeria" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="font-montserrat font-black italic text-3xl sm:text-5xl uppercase">
+                    GALERÍA DE <span class="text-neonBlue neon-text-blue">AMBIENTES</span>
+                </h2>
+                <div class="h-1 w-24 bg-neonYellow mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    Adéntrate de forma visual en la atmósfera cargada de elegancia, diversión y luces de neón que te esperan en Copacabana.
+                </p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=600" alt="Coctel Exclusivo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&q=80&w=600" alt="Mesa de Billar Profesional" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&q=80&w=600" alt="Noche de Tragos con Amigos" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600" alt="Luces y Neón del Bar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=600" alt="Ambiente Lounge" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600" alt="Barman en Acción" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&q=80&w=600" alt="Partida intensa de pool" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-square group cursor-pointer" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=600" alt="Snacks Crujientes" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location and Contact Info Section -->
+    <section id="ubicacion" class="py-24 bg-darkCard relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="font-montserrat font-black italic text-3xl sm:text-5xl uppercase">
+                    ¿DÓNDE <span class="text-neonYellow neon-text-yellow">ENCONTRARNOS?</span>
+                </h2>
+                <div class="h-1 w-24 bg-neonBlue mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    Visítanos en la zona de entretenimiento más importante de la ciudad y vive la verdadera rumba.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Location Cards & Details -->
+                <div class="lg:col-span-5 space-y-8">
+                    <!-- Address Card -->
+                    <div class="bg-darkBg border border-white/10 p-6 rounded-3xl flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-2xl bg-neonYellow/10 flex items-center justify-center text-neonYellow flex-shrink-0 text-xl">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-montserrat font-bold text-lg">Dirección</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Av. Bermúdez, Los Teques 1201, Miranda, Venezuela (Código Plus: 8XR5+XXV).
+                            </p>
+                            <a href="https://maps.app.goo.gl/AfWu4YawuQ9ugw456" target="_blank" class="inline-flex items-center text-xs text-neonYellow font-bold hover:underline pt-1">
+                                <i class="fa-solid fa-map-location-dot mr-1"></i> Abrir en Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Horarios Card -->
+                    <div class="bg-darkBg border border-white/10 p-6 rounded-3xl flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-2xl bg-neonBlue/10 flex items-center justify-center text-neonBlue flex-shrink-0 text-xl">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="space-y-2 w-full">
+                            <h4 class="font-montserrat font-bold text-lg">Horarios de Apertura</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm text-gray-300">
+                                <span>Miércoles a Jueves:</span>
+                                <span class="text-right text-white font-semibold">5:00 PM - 2:00 AM</span>
+                                <span>Viernes a Sábado:</span>
+                                <span class="text-right text-white font-semibold">5:00 PM - 4:00 AM</span>
+                                <span>Domingos:</span>
+                                <span class="text-right text-white font-semibold">3:00 PM - 12:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Card -->
+                    <div class="bg-darkBg border border-white/10 p-6 rounded-3xl flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-2xl bg-neonRed/10 flex items-center justify-center text-neonRed flex-shrink-0 text-xl">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-montserrat font-bold text-lg">Contacto Directo</h4>
+                            <p class="text-gray-300 text-sm">¿Dudas o eventos privados?</p>
+                            <p class="text-neonYellow font-bold text-base mt-1">+58 412-000-0000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps (Embedded) -->
+                <div class="lg:col-span-7 h-96 w-full rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl relative">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=8XR5%2BXXV%2C%20Av.%20Berm%C3%BAdez%2C%20Los%20Teques%201201%2C%20Miranda%2C%20Venezuela&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                        class="w-full h-full border-0 grayscale invert opacity-80" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-darkBg border-t border-white/10 py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Branding column -->
+                <div class="space-y-4 md:col-span-2">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border border-neonYellow bg-darkCard">
+                            <img src="logo_.jpg" alt="Logo Copacabana" class="w-full h-full object-cover" onerror="this.style.display='none';">
+                        </div>
+                        <span class="font-montserrat font-black italic text-xl tracking-wider text-white">
+                            COPACABANA <span class="text-neonYellow">POOL BAR</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-sm">
+                        La noche ideal de pool, cócteles refinados y vibraciones tropicales de rumba en un solo lugar. ¡Visítanos y vive una experiencia única!
+                    </p>
+                </div>
+
+                <!-- Navigation Links column -->
+                <div class="space-y-4">
+                    <h4 class="font-montserrat font-bold text-base text-neonBlue">Acceso Rápido</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#inicio" class="hover:text-neonYellow transition-colors">Inicio</a></li>
+                        <li><a href="#menu" class="hover:text-neonYellow transition-colors">Carta de Licores</a></li>
+                        <li><a href="#eventos" class="hover:text-neonYellow transition-colors">Próximos Eventos</a></li>
+                        <li><a href="#rumberos" class="hover:text-neonYellow transition-colors">Rumberos de la Semana</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social links column -->
+                <div class="space-y-4">
+                    <h4 class="font-montserrat font-bold text-base text-neonYellow">Síguenos en Redes</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/newcopacabana/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-neonYellow hover:border-neonYellow transition-all"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-neonYellow hover:border-neonYellow transition-all"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                        <a href="https://tiktok.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-neonYellow hover:border-neonYellow transition-all"><i class="fa-brands fa-tiktok text-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer and Rights -->
+            <div class="pt-8 border-t border-white/5 text-center text-xs text-gray-500 space-y-2">
+                <p>&copy; 2026 Copacabana en la Noche Pool & Bar. Todos los derechos reservados.</p>
+                <p>Disfruta con responsabilidad. Venta exclusiva a mayores de 18 años.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/584120000000?text=Hola!%20Me%20gustar%C3%ADa%20hacer%20una%20consulta%20o%20reserva%20para%20Copacabana%20Pool%20Bar." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center text-3xl shadow-lg transition-all duration-300 transform hover:scale-110 hover:-rotate-12 hover:shadow-emerald-500/50"
+       title="Escríbenos por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- RESERVATION MODAL (Popup Form) -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity" onclick="closeReservationModal()"></div>
+
+        <!-- Modal Box -->
+        <div class="flex items-center justify-center min-h-screen p-4 relative z-10">
+            <div class="bg-darkCard border border-white/10 w-full max-w-lg rounded-3xl overflow-hidden shadow-neon-yellow relative">
+                
+                <!-- Close Button -->
+                <button onclick="closeReservationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <!-- Modal Header -->
+                <div class="p-6 sm:p-8 bg-darkBg border-b border-white/5 text-center space-y-2">
+                    <span class="text-neonYellow text-xs font-bold uppercase tracking-wider">Planifica tu rumba nocturna</span>
+                    <h3 class="font-montserrat font-black italic text-2xl sm:text-3xl text-white uppercase">RESERVAR MESA</h3>
+                </div>
+
+                <!-- Modal Body (Form) -->
+                <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="p-6 sm:p-8 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Nombre -->
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Nombre Completo</label>
+                            <input type="text" required id="res-name" class="w-full bg-darkBg border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-neonYellow transition-colors" placeholder="Tu nombre">
+                        </div>
+                        <!-- Teléfono -->
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Teléfono de Contacto</label>
+                            <input type="tel" required id="res-phone" class="w-full bg-darkBg border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-neonYellow transition-colors" placeholder="Ej. +58 412 1234567">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- Fecha -->
+                        <div class="space-y-1 col-span-1">
+                            <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Fecha</label>
+                            <input type="date" required id="res-date" class="w-full bg-darkBg border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-neonYellow transition-colors">
+                        </div>
+                        <!-- Hora -->
+                        <div class="space-y-1 col-span-1">
+                            <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Hora</label>
+                            <select id="res-time" required class="w-full bg-darkBg border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-neonYellow transition-colors">
+                                <option value="17:00">5:00 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                                <option value="23:00">11:00 PM</option>
+                                <option value="01:00">1:00 AM</option>
+                            </select>
+                        </div>
+                        <!-- Personas -->
+                        <div class="space-y-1 col-span-1">
+                            <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Nº Personas</label>
+                            <select id="res-guests" required class="w-full bg-darkBg border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-neonYellow transition-colors">
+                                <option value="2">2 Personas</option>
+                                <option value="4">4 Personas</option>
+                                <option value="6">6 Personas</option>
+                                <option value="8">8+ Personas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tipo de Mesa -->
+                    <div class="space-y-2">
+                        <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block">Tipo de Reserva</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-white/10 bg-darkBg cursor-pointer hover:border-neonYellow transition-colors">
+                                <span class="flex items-center space-x-2 text-sm">
+                                    <i class="fa-solid fa-circle text-xs text-neonYellow"></i>
+                                    <span>Mesa de Pool</span>
+                                </span>
+                                <input type="radio" name="table_type" value="Pool Table" checked class="accent-neonYellow">
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-white/10 bg-darkBg cursor-pointer hover:border-neonBlue transition-colors">
+                                <span class="flex items-center space-x-2 text-sm">
+                                    <i class="fa-solid fa-martini-glass-citrus text-xs text-neonBlue"></i>
+                                    <span>Lounge / Bar</span>
+                                </span>
+                                <input type="radio" name="table_type" value="Lounge Area" class="accent-neonBlue">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Event Connection -->
+                    <input type="hidden" id="res-event-ref" value="">
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-3.5 mt-4 rounded-xl bg-neonYellow text-black font-montserrat font-extrabold hover:bg-white hover:shadow-neon-yellow transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>CONFIRMAR RESERVA
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM TOAST NOTIFICATION -->
+    <div id="toast-message" class="fixed top-24 right-6 z-50 bg-darkCard border border-emerald-500 rounded-2xl p-4 shadow-lg flex items-start space-x-3 max-w-sm transform translate-x-[150%] transition-transform duration-500">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-circle-check text-lg"></i>
+        </div>
+        <div class="space-y-1">
+            <h4 class="font-montserrat font-bold text-sm text-white">¡Reserva Enviada!</h4>
+            <p id="toast-body" class="text-xs text-gray-300 leading-relaxed"></p>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY PICTURES -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 overflow-y-auto hidden flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/95 backdrop-blur-sm" onclick="closeLightbox()"></div>
+        <div class="relative z-10 max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border border-white/10">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-neonYellow bg-black/50 p-2 rounded-full text-2xl transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="lightbox-img" src="" alt="Imagen ampliada" class="max-w-full max-h-[80vh] object-contain">
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const reservationModal = document.getElementById('reservation-modal');
+        const toastMessage = document.getElementById('toast-message');
+        const toastBody = document.getElementById('toast-body');
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        // Toggle mobile menu
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars';
+            } else {
+                icon.className = 'fa-solid fa-xmark';
+            }
+        }
+
+        // Reservation Modal Control
+        function openReservationModal(eventRef = '') {
+            reservationModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('res-event-ref').value = eventRef;
+            
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('res-date').min = today;
+            document.getElementById('res-date').value = today;
+        }
+
+        function closeReservationModal() {
+            reservationModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Handle Reservation Submit
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('res-name').value;
+            const phone = document.getElementById('res-phone').value;
+            const date = document.getElementById('res-date').value;
+            const time = document.getElementById('res-time').value;
+            const guests = document.getElementById('res-guests').value;
+            const tableType = document.querySelector('input[name="table_type"]:checked').value;
+            const eventRef = document.getElementById('res-event-ref').value;
+
+            closeReservationModal();
+            
+            let message = `Hola ${name}, hemos pre-reservado tu ${tableType === 'Pool Table' ? 'Mesa de Billar' : 'Área Lounge'} para ${guests} personas el día ${date} a las ${time}.`;
+            if(eventRef) {
+                message += ` Incluye acceso para el evento: ${eventRef}.`;
+            }
+            
+            toastBody.textContent = message;
+            toastMessage.classList.remove('translate-x-[150%]');
+            
+            setTimeout(() => {
+                toastMessage.classList.add('translate-x-[150%]');
+            }, 7000);
+
+            // Construct WhatsApp direct message
+            const waMessage = encodeURIComponent(
+                `*¡NUEVA RESERVA DESDE LA WEB!*\n\n` +
+                `👤 *Nombre:* ${name}\n` +
+                `📞 *Teléfono:* ${phone}\n` +
+                `📅 *Fecha:* ${date}\n` +
+                `⏰ *Hora:* ${time}\n` +
+                `👥 *Invitados:* ${guests} personas\n` +
+                `🎱 *Tipo:* ${tableType}\n` +
+                `${eventRef ? `🎉 *Evento:* ${eventRef}\n` : ''}` +
+                `\n_Por favor, confirma la disponibilidad de mi mesa._`
+            );
+            
+            setTimeout(() => {
+                window.open(`https://wa.me/584120000000?text=${waMessage}`, '_blank');
+            }, 2500);
+
+            document.getElementById('reservation-form').reset();
+        }
+
+        // Liquor Menu Database
+        const menuData = {
+            cocteles: [
+                { name: "Copacabana Sunset", desc: "Ron añejo premium, zumo de piña natural, refrescante licor de coco y granadina.", price: "$8.50", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=400", tags: ["Firma", "Dulce"] },
+                { name: "Mojito Blue Carioca", desc: "Ron blanco, hierbabuena fresca machacada, zumo de limón, azúcar y un toque de Blue Curaçao.", price: "$7.00", img: "https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&q=80&w=400", tags: ["Popular", "Fresco"] },
+                { name: "Caipirinha Copacabana", desc: "Directamente de Brasil: Cachaça de alta gama, limas frescas maceradas y azúcar morena.", price: "$7.50", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=400", tags: ["Clásico"] },
+                { name: "Margarita de Neón", desc: "Tequila reposado, triple sec, zumo de lima y borde escarchado con sal de cítricos.", price: "$8.00", img: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&q=80&w=400", tags: ["Fuerte"] },
+                { name: "Gin Tonic del Atlántico", desc: "Ginebra importada premium, tónica premium, frutos rojos silvestres y un toque de romero.", price: "$9.00", img: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&q=80&w=400", tags: ["Premium"] },
+                { name: "Cuba Libre Imperial", desc: "Ron de alta calidad, refresco de cola, zumo de lima fresco y cubos de hielo macizo.", price: "$6.50", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=400", tags: ["Clásico"] },
+            ],
+            premium: [
+                { name: "Whisky Old Parr 12 Años", desc: "Botella servida con hielera premium y juego de vasos de cristal. Trago o botella.", price: "$85.00", img: "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&q=80&w=400", tags: ["Botella"] },
+                { name: "Tequila Don Julio Reposado", desc: "Perfecto para rondas de shots con los panas de la mesa de billar. Acompañado de cítricos.", price: "$95.00", img: "https://images.unsplash.com/photo-1516535794938-1022c78a1121?auto=format&fit=crop&q=80&w=400", tags: ["Popular"] },
+                { name: "Ron Pampero Aniversario", desc: "Excelente destilado venezolano en copa balón o botella entera. Aroma a madera y vainilla.", price: "$60.00", img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=400", tags: ["Local Premium"] }
+            ],
+            cervezas: [
+                { name: "Balde Imperial (6 Corona)", desc: "El mejor acompañante de tus jugadas de billar. Frías y listas para destapar.", price: "$18.00", img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&q=80&w=400", tags: ["Frío", "Combo"] },
+                { name: "Cerveza Stella Artois", desc: "Cerveza belga de sabor nítido servida en copa fría tradicional.", price: "$4.00", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=400", tags: ["Importada"] },
+                { name: "Cerveza Artesanal de la Casa", desc: "De estilo I.P.A, aromas cítricos y lúpulo seleccionado. Muy refrescante.", price: "$5.00", img: "https://images.unsplash.com/photo-1584225065152-4a1454aa3d4e?auto=format&fit=crop&q=80&w=400", tags: ["Firma"] }
+            ],
+            snacks: [
+                { name: "Tequeños Crujientes (10 Uds)", desc: "Los reyes de la noche: Dedos de queso envueltos en masa crujiente acompañados de salsa tártara.", price: "$8.00", img: "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&q=80&w=400", tags: ["Favorito"] },
+                { name: "Alitas BBQ Ahumadas", desc: "12 Alitas de pollo bañadas en salsa BBQ artesanal, ligeramente picantes con papas fritas.", price: "$12.00", img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&q=80&w=400", tags: ["Para Compartir"] },
+                { name: "Nachos Copacabana", desc: "Totopos crujientes cubiertos con queso fundido, guacamole fresco, frijoles y pico de gallo.", price: "$10.00", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&q=80&w=400", tags: ["Novedad"] }
+            ]
+        };
+
+        function filterMenu(category) {
+            // Update Active Tab Button Styles
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-montserrat font-bold transition-all duration-300 text-gray-400 hover:text-white';
+            });
+
+            const activeBtn = document.getElementById(`tab-${category}`);
+            if (activeBtn) {
+                activeBtn.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-montserrat font-bold transition-all duration-300 bg-neonYellow text-black hover:shadow-neon-yellow';
+            }
+
+            // Render Items
+            const grid = document.getElementById('menu-items-grid');
+            grid.innerHTML = '';
+
+            menuData[category].forEach(item => {
+                const tagsHtml = item.tags ? item.tags.map(t => `<span class="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[10px] text-neonBlue font-semibold uppercase">${t}</span>`).join('') : '';
+                
+                const itemCard = `
+                    <div class="bg-darkBg border border-white/10 rounded-3xl overflow-hidden group hover:border-neonBlue/40 transition-all duration-300 flex flex-col h-full justify-between">
+                        <div class="relative overflow-hidden aspect-[16/10]">
+                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x250/161618/fff200?text=${item.name}';">
+                            <span class="absolute top-4 right-4 bg-darkBg/90 backdrop-blur-md text-neonYellow border border-neonYellow/20 font-montserrat font-black text-sm px-3 py-1 rounded-full">${item.price}</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="font-montserrat font-bold text-xl text-white group-hover:text-neonYellow transition-colors">${item.name}</h3>
+                                <p class="text-gray-400 text-xs sm:text-sm mt-2 line-clamp-3 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-2">
+                                ${tagsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += itemCard;
+            });
+        }
+
+        // Interaction: Like Rumberos of the Week
+        function likeRumbero(btn) {
+            const countSpan = btn.querySelector('.like-count');
+            let currentLikes = parseInt(countSpan.textContent);
+            
+            if (btn.classList.contains('liked')) {
+                btn.classList.remove('liked', 'bg-neonRed', 'text-white');
+                btn.classList.add('bg-white/10');
+                countSpan.textContent = currentLikes - 1;
+            } else {
+                btn.classList.add('liked', 'bg-neonRed', 'text-white');
+                btn.classList.remove('bg-white/10');
+                countSpan.textContent = currentLikes + 1;
+                
+                const icon = btn.querySelector('i');
+                icon.classList.add('scale-125');
+                setTimeout(() => icon.classList.remove('scale-125'), 300);
+            }
+        }
+
+        // Lightbox Gallery Control
+        function openLightbox(container) {
+            const img = container.querySelector('img');
+            lightboxImg.src = img.src;
+            lightboxModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Startup Trigger
+        window.onload = function() {
+            filterMenu('cocteles');
+        };
+    </script>
+</body>
+</html>
